@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-from-elb
+  namespace: default
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+      # - podSelector:
+      #     matchLabels:
+      #       app: wordpress
+      - ipBlock:
+          cidr: 172.31.0.0/16
+      ports:
+      - protocol: TCP
+        port: 
